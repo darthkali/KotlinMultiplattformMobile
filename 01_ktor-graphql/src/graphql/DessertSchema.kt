@@ -27,15 +27,17 @@ fun SchemaBuilder.dessertSchema(dessertService: DessertService) {
         }
     }
 
-//    query("desserts") {
-//        resolver { ->
-//            try {
-//                repository.getAll()
-//            } catch (e: Exception) {
-//                emptyList<Dessert>()
-//            }
-//        }
-//    }
+
+
+    query("desserts") {
+        resolver { page: Int?, size: Int? ->
+            try {
+                dessertService.getDessertsPage(page?:0, size?:10)
+            } catch (e: Exception) {
+                null
+            }
+        }
+    }
 
     mutation("createDessert") {
         description = "Create a new dessert"
@@ -55,7 +57,7 @@ fun SchemaBuilder.dessertSchema(dessertService: DessertService) {
         resolver { dessertId: String, dessertInput: DessertInput ->
             try {
                 val userId = "abc"
-                dessertService.updateDessert(userId,dessertId, dessertInput)
+                dessertService.updateDessert(userId, dessertId, dessertInput)
             } catch (e: Exception) {
                 null
             }
@@ -67,7 +69,7 @@ fun SchemaBuilder.dessertSchema(dessertService: DessertService) {
         resolver { dessertId: String ->
             try {
                 val userId = "abc"
-                dessertService.deleteDessert(userId,dessertId)
+                dessertService.deleteDessert(userId, dessertId)
             } catch (e: Exception) {
                 null
             }

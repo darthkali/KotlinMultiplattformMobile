@@ -2,6 +2,7 @@ package com.example.services
 
 import com.example.models.Dessert
 import com.example.models.DessertInput
+import com.example.models.DessertPage
 import com.example.repository.DessertRepository
 import com.mongodb.client.MongoClient
 import org.koin.core.component.KoinComponent
@@ -12,6 +13,10 @@ import java.util.*
 class DessertService : KoinComponent {
     private val client: MongoClient by inject()
     private val repo: DessertRepository = DessertRepository(client)
+
+    fun getDessertsPage(page: Int, size: Int): DessertPage {
+        return repo.getDessertsPage(page, size)
+    }
 
     fun getDessert(id: String): Dessert {
         return repo.getById(id)
@@ -44,7 +49,7 @@ class DessertService : KoinComponent {
         error("Cannot Update Desserts")
     }
 
-    fun deleteDessert(userId: String, dessertId: String ): Boolean{
+    fun deleteDessert(userId: String, dessertId: String): Boolean {
         val dessert = repo.getById(dessertId)
         if (dessert.userId == userId) {
             return repo.delete(dessertId)
