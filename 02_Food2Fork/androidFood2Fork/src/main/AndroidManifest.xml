@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.android.example.food2fork.android">
+    package="com.codingwithmitch.food2forkkmm.android">
 
     <application
         android:allowBackup="false"
