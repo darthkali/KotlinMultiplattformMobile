@@ -1,4 +1,4 @@
-package com.codingwithmitch.food2forkkmm
+package de.darthkali.food2fork
 
 expect class Platform() {
     val platform: String
