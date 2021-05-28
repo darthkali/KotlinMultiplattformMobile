@@ -10,12 +10,16 @@ import androidx.navigation.compose.*
 import de.darthkali.food2fork.android.presentation.recipe_detail.RecipeDetailScreen
 import de.darthkali.food2fork.android.presentation.recipe_detail.RecipeDetailViewModel
 import de.darthkali.food2fork.android.presentation.recipe_list.RecipeListScreen
+import de.darthkali.food2fork.android.presentation.recipe_list.RecipeListViewModel
 
 @Composable
 fun Navigation() {
     val navController = rememberNavController()
     NavHost(navController = navController, startDestination = Screen.RecipeList.route) {
         composable(route = Screen.RecipeList.route) { navBackStackEntry ->
+            val factory = HiltViewModelFactory(LocalContext.current, navBackStackEntry)
+            val viewModel: RecipeListViewModel = viewModel("RecipeListViewModel", factory)
+
             RecipeListScreen(
                 onSelectedRecipe = { recipeId ->
                     navController.navigate(Screen.RecipeDetail.route + "/$recipeId")
