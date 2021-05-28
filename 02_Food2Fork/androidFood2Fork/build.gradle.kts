@@ -1,5 +1,6 @@
 plugins {
     id(Plugins.androidApplication)
+    id(Plugins.hilt)
     kotlin(KotlinPlugins.android)
     kotlin(KotlinPlugins.kapt)
     kotlin(KotlinPlugins.serialization) version Kotlin.version
@@ -52,6 +53,10 @@ dependencies {
     implementation(Compose.navigation)
 
     implementation(Google.material)
+
+    implementation(Hilt.hiltAndroid)
+    implementation(Hilt.hiltNavigation)
+    kapt(Hilt.hiltCompiler)
 
     implementation(Kotlinx.datetime)
 

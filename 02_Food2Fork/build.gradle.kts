@@ -1,22 +1,22 @@
 buildscript {
     repositories {
-        gradlePluginPortal()
-        jcenter()
-        google()
         mavenCentral()
+        gradlePluginPortal()
+//        jcenter()
+        google()
     }
     dependencies {
         classpath(Build.kotlinGradlePlugin)
         classpath(Build.buildTools)
-        classpath("com.android.tools.build:gradle:7.1.0-alpha01")
+        classpath(Build.hiltGradlePlugin)
     }
 }
 
 allprojects {
     repositories {
-        google()
-        jcenter()
         mavenCentral()
+        google()
+//        jcenter()
     }
 }
 
