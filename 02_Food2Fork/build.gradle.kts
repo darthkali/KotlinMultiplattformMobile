@@ -1,9 +1,9 @@
 buildscript {
     repositories {
-        mavenCentral()
         gradlePluginPortal()
-//        jcenter()
+        jcenter()
         google()
+        mavenCentral()
     }
     dependencies {
         classpath(Build.kotlinGradlePlugin)
@@ -14,9 +14,9 @@ buildscript {
 
 allprojects {
     repositories {
-        mavenCentral()
         google()
-//        jcenter()
+        jcenter()
+        mavenCentral()
     }
 }
 

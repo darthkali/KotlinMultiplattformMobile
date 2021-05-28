@@ -1,9 +1,14 @@
 package de.darthkali.food2fork.android.presentation.navigation
 
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.platform.LocalContext
+import androidx.hilt.navigation.HiltViewModelFactory
+import androidx.lifecycle.viewmodel.compose.viewModel
+
 import androidx.navigation.NavType
 import androidx.navigation.compose.*
 import de.darthkali.food2fork.android.presentation.recipe_detail.RecipeDetailScreen
+import de.darthkali.food2fork.android.presentation.recipe_detail.RecipeDetailViewModel
 import de.darthkali.food2fork.android.presentation.recipe_list.RecipeListScreen
 
 @Composable
@@ -24,7 +29,9 @@ fun Navigation() {
                     type = NavType.IntType
                 })
         ) { navBackStackEntry ->
-            RecipeDetailScreen(recipeId = navBackStackEntry.arguments?.getInt("recipeId"))
+            val factory = HiltViewModelFactory(LocalContext.current, navBackStackEntry)
+            val viewModel: RecipeDetailViewModel = viewModel("RecipeDetailViewModel", factory)
+            RecipeDetailScreen(recipeId = viewModel.recipeId.value)
         }
     }
 
