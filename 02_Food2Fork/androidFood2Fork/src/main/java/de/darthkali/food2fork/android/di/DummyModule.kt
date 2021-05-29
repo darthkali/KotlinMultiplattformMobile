@@ -23,21 +23,16 @@ object DummyModule {
 
     @Singleton
     @Provides
-    fun provideDummyObject25(
+    fun provideDummyObject(
         dummyCapacity: Int
     ): Dummy {
         return DummyImpl(dummyCapacity)
     }
 
+
     @Singleton
     @Provides
-    fun provideDummy22Capafdghdfghcity(): String {
-        return "500"
+    fun provideDummyCapacity(): Int {
+        return 600
     }
-
-//    @Singleton
-//    @Provides
-//    fun provideDummyCapacity(): Int {
-//        return 600
-//    }
 }
