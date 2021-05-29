@@ -12,6 +12,7 @@ import de.darthkali.food2fork.android.presentation.recipe_detail.RecipeDetailVie
 import de.darthkali.food2fork.android.presentation.recipe_list.RecipeListScreen
 import de.darthkali.food2fork.android.presentation.recipe_list.RecipeListViewModel
 
+@ExperimentalStdlibApi
 @Composable
 fun Navigation() {
     val navController = rememberNavController()
@@ -35,7 +36,7 @@ fun Navigation() {
         ) { navBackStackEntry ->
             val factory = HiltViewModelFactory(LocalContext.current, navBackStackEntry)
             val viewModel: RecipeDetailViewModel = viewModel("RecipeDetailViewModel", factory)
-            RecipeDetailScreen(recipeId = viewModel.recipeId.value)
+            RecipeDetailScreen(recipe = viewModel.recipe.value)
         }
     }
 
