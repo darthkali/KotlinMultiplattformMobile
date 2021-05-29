@@ -1,15 +1,11 @@
 package de.darthkali.food2fork.datasource.network.model
 
-import de.darthkali.food2fork.datasource.network.KtorClientFactory
 import de.darthkali.food2fork.datasource.network.RecipeService
 import de.darthkali.food2fork.datasource.network.toRecipe
 import de.darthkali.food2fork.datasource.network.toRecipeList
 import de.darthkali.food2fork.domain.model.Recipe
-import de.darthkali.food2fork.domain.util.DatetimeUtil
 import io.ktor.client.*
 import io.ktor.client.request.*
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.launch
 
 class RecipeServiceImpl(
     private val httpClient: HttpClient,

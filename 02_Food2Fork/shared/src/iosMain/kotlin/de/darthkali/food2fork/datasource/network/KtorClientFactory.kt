@@ -8,8 +8,8 @@ import kotlinx.serialization.json.Json
 
 actual class KtorClientFactory{
     actual fun build(): HttpClient {
-        return HttpClient(Ios){
-            install(JsonFeature){
+        return HttpClient(Ios) {
+            install(JsonFeature) {
                 serializer = KotlinxSerializer(
                     kotlinx.serialization.json.Json {
                         ignoreUnknownKeys = true
