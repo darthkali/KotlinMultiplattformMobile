@@ -22,6 +22,7 @@ class SearchRecipes(
                 page = page,
                 query = query
             )
+            kotlinx.coroutines.delay(500) //just for test
             emit(DataState.data(data = recipes))
         } catch (e: Exception) {
             emit(DataState.error<List<Recipe>>(message = e.message?: "Unknown Error"))
