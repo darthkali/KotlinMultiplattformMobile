@@ -26,10 +26,14 @@ fun Navigation() {
             val viewModel: RecipeListViewModel = viewModel("RecipeListViewModel", factory)
 
             RecipeListScreen(
-                onSelectedRecipe = { recipeId ->
-                    navController.navigate(Screen.RecipeDetail.route + "/$recipeId")
 
-                })
+                state = viewModel.state.value,
+                onClickRecipeListItem = {recipeId ->
+                    navController.navigate(Screen.RecipeDetail.route + "/$recipeId")
+                }
+            )
+
+
         }
         composable(
             route = Screen.RecipeDetail.route + "/{recipeId}",
