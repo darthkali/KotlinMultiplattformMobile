@@ -3,6 +3,8 @@ package de.darthkali.food2fork.android
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.activity.compose.setContent
+import androidx.compose.material.ExperimentalMaterialApi
+import androidx.compose.ui.ExperimentalComposeUiApi
 import dagger.hilt.android.AndroidEntryPoint
 import de.darthkali.food2fork.android.presentation.navigation.Navigation
 
@@ -12,6 +14,8 @@ const val BASE_URL = "https://food2fork.ca/api/recipe"
 
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
+    @ExperimentalMaterialApi
+    @ExperimentalComposeUiApi
     @ExperimentalStdlibApi
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
