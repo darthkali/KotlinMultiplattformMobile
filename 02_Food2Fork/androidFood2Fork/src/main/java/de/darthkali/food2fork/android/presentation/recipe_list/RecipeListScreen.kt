@@ -3,11 +3,13 @@ package de.darthkali.food2fork.android.presentation.recipe_list
 import androidx.compose.material.ExperimentalMaterialApi
 import androidx.compose.material.Scaffold
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.remember
 import androidx.compose.ui.ExperimentalComposeUiApi
 import de.darthkali.food2fork.android.presentation.recipe_list.components.RecipeList
 import de.darthkali.food2fork.android.presentation.recipe_list.components.SearchAppBar
 import de.darthkali.food2fork.android.presentation.theme.AppTheme
 import de.darthkali.food2fork.interactors.recipe_list.RecipeListEvents
+import de.darthkali.food2fork.presentation.recipe_list.FoodCategoryUtil
 import de.darthkali.food2fork.presentation.recipe_list.RecipeListState
 
 
@@ -21,10 +23,12 @@ fun RecipeListScreen(
 ) {
     AppTheme(displayProgressBar = state.isLoading) {
 
+        val foodCategories = remember{FoodCategoryUtil().getAllFoodCategories()}
         Scaffold(
             topBar = {
                 SearchAppBar(
                     query = state.query,
+                    categories = foodCategories,
                     onQueryChange = {
                         onTriggerEvent(RecipeListEvents.OnUpdateQuery(it))
                     },
