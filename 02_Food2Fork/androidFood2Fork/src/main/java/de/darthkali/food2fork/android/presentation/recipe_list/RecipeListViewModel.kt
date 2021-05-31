@@ -33,6 +33,12 @@ constructor(
             RecipeListEvents.LoadRecipes -> {
                 loadRecipes()
             }
+            RecipeListEvents.NewSearch -> {
+                newSearch()
+            }
+            is RecipeListEvents.OnUpdateQuery -> {
+                state.value = state.value.copy(query = event.query)
+            }
             RecipeListEvents.NextPage -> {
                 nextPage()
             }
@@ -48,6 +54,16 @@ constructor(
 
     private fun nextPage() {
         state.value = state.value.copy(page = state.value.page + 1)
+        loadRecipes()
+    }
+
+    /**
+     * Perform a new search:
+     * 1. page = 1
+     * 2. list position needs to be reset
+     */
+    private fun newSearch(){
+        state.value = state.value.copy(page = 1, recipes = listOf())
         loadRecipes()
     }
 
