@@ -21,6 +21,7 @@ import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
 import de.darthkali.food2fork.presentation.recipe_list.FoodCategory
+import de.darthkali.food2fork.presentation.recipe_list.FoodCategoryUtil
 
 
 @ExperimentalComposeUiApi
@@ -28,6 +29,8 @@ import de.darthkali.food2fork.presentation.recipe_list.FoodCategory
 fun SearchAppBar(
     query: String,
     categories: List<FoodCategory>,
+    onSelectedCategoryChanged: (FoodCategory) -> Unit,
+    selectedCategory: FoodCategory? = null,
     onQueryChange: (String) -> Unit,
     onExecuteSearch: () -> Unit,
 ) {
@@ -76,9 +79,11 @@ fun SearchAppBar(
                 items(categories) {
                     FoodCategoryChip(
                         category = it.value,
-                        isSelected = false,
+                        isSelected = selectedCategory == it,
                         onSelectedCategoryChanged = {
-                            /*TODO*/
+                          FoodCategoryUtil().getFoodCategory(it)?.let { newCategory ->
+                              onSelectedCategoryChanged(newCategory)
+                          }
                         })
 
                 }

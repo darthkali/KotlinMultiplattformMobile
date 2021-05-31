@@ -9,6 +9,7 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import de.darthkali.food2fork.domain.model.Recipe
 import de.darthkali.food2fork.interactors.recipe_list.RecipeListEvents
 import de.darthkali.food2fork.interactors.recipe_list.SearchRecipes
+import de.darthkali.food2fork.presentation.recipe_list.FoodCategory
 import de.darthkali.food2fork.presentation.recipe_list.RecipeListState
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
@@ -37,7 +38,10 @@ constructor(
                 newSearch()
             }
             is RecipeListEvents.OnUpdateQuery -> {
-                state.value = state.value.copy(query = event.query)
+                state.value = state.value.copy(query = event.query, selectedCategory = null)
+            }
+            is RecipeListEvents.OnSelectedCategory -> {
+                onSelectCategory(event.category)
             }
             RecipeListEvents.NextPage -> {
                 nextPage()
@@ -65,6 +69,11 @@ constructor(
     private fun newSearch(){
         state.value = state.value.copy(page = 1, recipes = listOf())
         loadRecipes()
+    }
+
+    private fun onSelectCategory(category: FoodCategory){
+        state.value = state.value.copy(selectedCategory =  category, query = category.value)
+        newSearch()
     }
 
     private fun loadRecipes() {

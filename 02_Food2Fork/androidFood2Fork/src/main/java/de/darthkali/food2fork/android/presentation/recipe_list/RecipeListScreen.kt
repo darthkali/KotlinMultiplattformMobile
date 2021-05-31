@@ -23,12 +23,16 @@ fun RecipeListScreen(
 ) {
     AppTheme(displayProgressBar = state.isLoading) {
 
-        val foodCategories = remember{FoodCategoryUtil().getAllFoodCategories()}
+        val foodCategories = remember { FoodCategoryUtil().getAllFoodCategories() }
         Scaffold(
             topBar = {
                 SearchAppBar(
                     query = state.query,
                     categories = foodCategories,
+                    onSelectedCategoryChanged = {
+                        onTriggerEvent(RecipeListEvents.OnSelectedCategory(it))
+                    },
+                    selectedCategory = state.selectedCategory,
                     onQueryChange = {
                         onTriggerEvent(RecipeListEvents.OnUpdateQuery(it))
                     },
